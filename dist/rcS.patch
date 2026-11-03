@@ -1,0 +1,32 @@
+--- rcS
++++ rcS
+@@ -175,7 +175,8 @@
+ export UBOOT_MMC
+ export UBOOT_RECOVERY
+ 
+-find /usr/local/Trolltech/QtEmbedded-4.6.2-arm/lib/ -type f -exec readahead {} \;
++# Preloading Nickel's Qt libraries is useless when Signet takes over.
++[ -x /usr/local/signet/signetd ] || find /usr/local/Trolltech/QtEmbedded-4.6.2-arm/lib/ -type f -exec readahead {} \;
+ 
+ FORCE_FACTORY_RESET=0
+ FS_CORRUPT=0
+@@ -338,7 +339,17 @@
+ 
+ rm /mnt/onboard/.kobo/sickel_frozen
+ 
+-/usr/local/Kobo/hindenburg &
+-LIBC_FATAL_STDERR_=1 /usr/local/Kobo/nickel -platform kobo -skipFontLoad &
++# Signet: when the reader is installed and enabled, it replaces Nickel at boot.
++# Falls back to Nickel if /mnt/onboard/.signet/disable exists, the mode is not
++# "signet", or the binary is missing. The daemon is also started by the loop0 udev
++# rule (/tmp/signetd.ran prevents a double start).
++SIGNET_MODE=
++[ -r /mnt/onboard/.signet/mode ] && SIGNET_MODE=$(cat /mnt/onboard/.signet/mode)
++if [ -x /usr/local/signet/signetd ] && [ "$SIGNET_MODE" = "signet" ] && [ ! -e /mnt/onboard/.signet/disable ]; then
++	SIGNET_FROM_RCS=1 /usr/local/signet/signetd &
++else
++	/usr/local/Kobo/hindenburg &
++	LIBC_FATAL_STDERR_=1 /usr/local/Kobo/nickel -platform kobo -skipFontLoad &
++fi
+ [ $PLATFORM != freescale ] && rm -rf /dev/mmcblk1* && udevadm trigger &
+ [ -e /drivers/$PLATFORM/misc/lowmem.ko ] && insmod /drivers/$PLATFORM/misc/lowmem.ko &

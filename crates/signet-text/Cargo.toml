@@ -1,0 +1,14 @@
+[package]
+name = "signet-text"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "Signet typography: font loading, shaping (kerning, ligatures), rasterization, layout"
+
+[dependencies]
+signet-fb = { path = "../signet-fb" }
+rustybuzz = "0.20"
+ab_glyph = "0.2"
+skrifa = "0.48"
+ab_glyph_rasterizer = "0.1"

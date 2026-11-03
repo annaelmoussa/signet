@@ -1,0 +1,18 @@
+[package]
+name = "signet"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "Signet: a reader built for reading. Home, reading, settings."
+
+[dependencies]
+signet-fb = { path = "../signet-fb" }
+signet-input = { path = "../signet-input" }
+signet-text = { path = "../signet-text" }
+signet-epub = { path = "../signet-epub" }
+signet-dict = { path = "../signet-dict" }
+jpeg-decoder = { version = "0.3", default-features = false }
+png = "0.18"
+libc = "0.2"
+ab_glyph_rasterizer = "0.1"

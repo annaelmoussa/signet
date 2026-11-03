@@ -1,0 +1,18 @@
+# Signet development sshd (dev mode only)
+Port 22
+ListenAddress 0.0.0.0
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+PermitRootLogin without-password
+PubkeyAuthentication yes
+AuthorizedKeysFile /usr/local/signet/authorized_keys
+StrictModes no
+PasswordAuthentication no
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+Compression no
+ClientAliveInterval 15
+ClientAliveCountMax 4
+PidFile /tmp/sshd-signet.pid
+Subsystem sftp /usr/libexec/sftp-server

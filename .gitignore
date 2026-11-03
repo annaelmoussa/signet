@@ -1,0 +1,44 @@
+/target
+.DS_Store
+._*
+
+# Build outputs and device secrets
+/dist/KoboRoot.tgz
+/dist/authorized_keys
+/dist/dropbearmulti
+
+# Article material and raw device dumps: kept locally, never published
+/docs/
+
+# Full copy of Kobo's firmware init script: not ours to redistribute (see dist/rcS.patch)
+/dist/rcS.signet
+
+# Python bytecode
+__pycache__/
+
+# Secrets and personal files: never commit, wherever they end up
+.env
+.env.*
+.signet/
+wifi.conf
+authorized_keys
+known_hosts
+id_rsa*
+id_ed25519*
+id_ecdsa*
+signet_kobo*
+*_host_key
+*.pem
+*.key
+*.p12
+*.bundle
+*.log
+
+# Local device address for tools/kobo-ssh.sh
+/dist/kobo-host
+
+# Books and device databases
+*.epub
+*.kepub
+KoboReader.sqlite
+dicthtml-*.zip

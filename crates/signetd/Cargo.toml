@@ -1,0 +1,10 @@
+[package]
+name = "signetd"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "Signet boot daemon (launched by udev at Kobo boot)"
+
+[dependencies]
+libc = "0.2"

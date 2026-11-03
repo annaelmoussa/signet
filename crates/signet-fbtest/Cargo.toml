@@ -1,0 +1,9 @@
+[package]
+name = "signet-fbtest"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[dependencies]
+signet-fb = { path = "../signet-fb" }

@@ -1,0 +1,10 @@
+# Default target: Kobo Nia (i.MX6 SoloLite, Cortex-A9, ARMv7 hard-float).
+# We link statically with musl so as not to depend on any Kobo firmware library.
+[target.armv7-unknown-linux-musleabihf]
+rustflags = [
+  "-C", "target-cpu=cortex-a9",
+  "-C", "target-feature=+neon,+vfp3,+crt-static",
+]
+
+[alias]
+kobo = "zigbuild --release --target armv7-unknown-linux-musleabihf"

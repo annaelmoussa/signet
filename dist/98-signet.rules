@@ -1,0 +1,3 @@
+# Signet: launched at every boot when the loop0 device appears
+# (the earliest and most reliable udev event on Kobos).
+KERNEL=="loop0", RUN+="/usr/local/signet/signet-boot.sh"
